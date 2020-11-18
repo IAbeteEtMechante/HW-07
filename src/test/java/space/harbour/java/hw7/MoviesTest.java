@@ -35,9 +35,9 @@ public class MoviesTest {
                 "Quentin Tarantino", new String[]{"Brad Pitt", "Christopher Waltz"}, 8.1);
 
         //put those movies in a list
-        myMovies.add(pulpFiction);
         myMovies.add(titanic);
         myMovies.add(fightClub);
+        myMovies.add(pulpFiction);
         myMovies.add(ingloriousBasterds);
     }
 
@@ -108,5 +108,39 @@ public class MoviesTest {
                         .get());
 
         assertEquals(bestMovie, "Pulp Fiction");
+    }
+
+    //test the director filter
+    @Test
+    public void testDirectorFilter() {
+        List<Movies> moviesFromTarentino =
+                myMovies.stream()
+                        .filter(x -> x.director.equals("Quentin Tarantino"))
+                        .collect(Collectors.toList());
+        assertTrue(moviesFromTarentino.contains(myMovies.get(3)));
+        assertTrue(moviesFromTarentino.contains(myMovies.get(2)));
+    }
+
+    //test the actor filter
+    @Test
+    public void testActorFilter() {
+        List<Movies> moviesWithBradPitt =
+                myMovies.stream()
+                        .filter(movies -> Arrays.asList(movies.actors).contains("Brad Pitt"))
+                        .collect(Collectors.toList());
+        assertTrue(moviesWithBradPitt.contains(myMovies.get(1)));
+        assertTrue(moviesWithBradPitt.contains(myMovies.get(3)));
+    }
+
+    //test the genre filter
+    @Test
+    public void testGenreFilter() {
+        List<Movies> moviesWithAction =
+                myMovies.stream()
+                        .filter(movies -> Arrays.asList(movies.genres).contains("action"))
+                        .collect(Collectors.toList());
+        assertTrue(moviesWithAction.contains(myMovies.get(1)));
+        assertTrue(moviesWithAction.contains(myMovies.get(2)));
+        assertTrue(moviesWithAction.contains(myMovies.get(3)));
     }
 }
