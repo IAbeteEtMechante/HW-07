@@ -56,17 +56,17 @@ public class Movies {
 
         //Create some sample movies with the fields we need
 
-        Movies pulpFiction = new Movies("Pulp Fiction", 1995,
-                154, new String[]{"adventure", "action", "comedy"}, "Quentin Tarantino",
-                new String[]{"John Travolta", "Samuel L. Jackson", "Uma Thurman"}, 9.2);
-
         Movies titanic = new Movies("Titanic", 1997,
                 195, new String[]{"romance", "action", "documentary"}, "James Cameron",
                 new String[]{"Leonardo Di Caprio", "Kate Winsley"}, 7.8);
 
         Movies fightClub = new Movies("Fight Club", 1999,
-                154, new String[]{"psychological thriller", "romance", "satire"}, "David Fincher",
+                185, new String[]{"psychological thriller", "romance", "satire"}, "David Fincher",
                 new String[]{"Brad Pitt", "Edward Norton", "Helena Bonham"}, 8.8);
+
+        Movies pulpFiction = new Movies("Pulp Fiction", 1995,
+                154, new String[]{"adventure", "action", "comedy"}, "Quentin Tarantino",
+                new String[]{"John Travolta", "Samuel L. Jackson", "Uma Thurman"}, 9.2);
 
         //put those movies in a list
         ArrayList<Movies> myMovies = new ArrayList<>();
@@ -74,7 +74,28 @@ public class Movies {
         myMovies.add(titanic);
         myMovies.add(fightClub);
 
-        
+        //sort by release year
+        System.out.println("\nSort movies by release year:");
+        myMovies.stream()
+                .sorted((movie1, movie2) -> movie1.year.compareTo(movie2.year))
+                .map(movie -> "Released in " + movie.year + ": " + movie.title)
+                .forEach(System.out::println);
+
+        //sort by length
+        System.out.println("\nSort movies by length:");
+        myMovies.stream()
+                .sorted((movie1, movie2) -> movie1.runtime.compareTo(movie2.runtime))
+                .map(movie -> movie.runtime + " min, " + movie.title)
+                .forEach(System.out::println);
+
+        //sort by ratings
+        System.out.println("\nSort movies by ratings:");
+        myMovies.stream()
+                .sorted((movie1, movie2) -> Double.compare(movie1.ratings, movie2.ratings))
+                .map(movie -> "Rating of: " + movie.ratings + " ---->" + movie.title)
+                .forEach(System.out::println);
+
+
 
 
 
