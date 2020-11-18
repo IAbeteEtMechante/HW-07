@@ -1,5 +1,5 @@
-# HW-04
-This is the 4th homework for M3-Java (Harbour Space)
+# HW-07
+This is the 7th homework for M3-Java (Harbour Space)
 
 Author: Pierre Schwob
 
