@@ -57,22 +57,27 @@ public class Movies {
         //Create some sample movies with the fields we need
 
         Movies titanic = new Movies("Titanic", 1997,
-                195, new String[]{"romance", "action", "documentary"}, "James Cameron",
+                195, new String[]{"romance", "documentary"}, "James Cameron",
                 new String[]{"Leonardo Di Caprio", "Kate Winsley"}, 7.8);
 
         Movies fightClub = new Movies("Fight Club", 1999,
-                185, new String[]{"psychological thriller", "romance", "satire"}, "David Fincher",
+                185, new String[]{"psychological thriller", "action", "satire"}, "David Fincher",
                 new String[]{"Brad Pitt", "Edward Norton", "Helena Bonham"}, 8.8);
 
         Movies pulpFiction = new Movies("Pulp Fiction", 1995,
                 154, new String[]{"adventure", "action", "comedy"}, "Quentin Tarantino",
                 new String[]{"John Travolta", "Samuel L. Jackson", "Uma Thurman"}, 9.2);
 
+        Movies ingloriousBasterds = new Movies("Inglorious Basterds", 2009,
+                153, new String[]{"adventure", "documentary", "comedy", "action"},
+                "Quentin Tarantino", new String[]{"Brad Pitt", "Christopher Waltz"}, 8.1);
+
         //put those movies in a list
         ArrayList<Movies> myMovies = new ArrayList<>();
         myMovies.add(pulpFiction);
         myMovies.add(titanic);
         myMovies.add(fightClub);
+        myMovies.add(ingloriousBasterds);
 
         //sort by release year
         System.out.println("\nSort movies by release year:");
@@ -95,9 +100,26 @@ public class Movies {
                 .map(movie -> "Rating of: " + movie.ratings + " ---->" + movie.title)
                 .forEach(System.out::println);
 
+        //filter by director
+        System.out.println("\nFilter movies directed by Quentin Tarentino:");
+        myMovies.stream()
+                .filter(x -> x.director.equals("Quentin Tarantino"))
+                .map(movie -> movie.title)
+                .forEach(System.out::println);
 
+        //filter by actor
+        System.out.println("\nFilter movies with Brad Pitt:");
+        myMovies.stream()
+                .filter(movies -> Arrays.asList(movies.actors).contains("Brad Pitt"))
+                .map(movie -> movie.title)
+                .forEach(System.out::println);
 
-
+        //filter by genre
+        System.out.println("\nFilter action movies:");
+        myMovies.stream()
+                .filter(movies -> Arrays.asList(movies.genres).contains("action"))
+                .map(movie -> movie.title)
+                .forEach(System.out::println);
 
     }
 
